@@ -1,0 +1,196 @@
+@import '../lib/mixins';
+
+// Vertical align height
+.height-fix {
+  height:100%;
+  width:0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dropdown {
+  @include corner(4px, 4px, 4px, 4px);
+  font-size: 16px;
+  @include unselectable();
+
+  button {
+    width: 252px;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    margin-left:10px;
+    margin-bottom: 10px;
+    background: #fdfdfd;
+    text-align: left;
+
+    &:focus {
+      outline-width:0;
+    }
+
+    .btn-text {
+      display: inline-block;
+    }
+
+    .caret {
+      float: right;
+      width: 0;
+      height: 0;
+      margin-top: 8px;
+      border-top: 4px solid #000000;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      content: "";
+    } // .caret
+  } // button
+
+  ul {
+    width: 250px;
+    padding: 15px 0;
+    margin-left:10px;
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    list-style: none;
+    @include corner(4px, 4px, 4px, 4px);
+
+    &.hidden {
+      display: none;
+    }
+
+    li {
+      padding: 0 10px;
+      line-height: 25px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($dark-color, 40%);
+      }
+    }
+  } // ul
+} // .dropdown
+
+.btn {
+  padding:5px 10px;
+  border:1px solid #ccc;
+  cursor:pointer;
+  @include corner(4px, 4px, 4px, 4px);
+  @include verticalAlign();
+  @include backgroundHover(#f9f9f9);
+  @include backgroundClick(#f9f9f9);
+  @include buttonTransition(0.2s);
+
+  &.primary {
+    color: #fff;
+    border: 1px solid #2F477A;
+    @include backgroundHover(#3B5998);
+    @include backgroundClick(#3B5998);
+  }
+} // .btn
+
+i.icon {
+  display: inline-block;
+  font-family: 'Flat-UI-Icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+
+  &.white { color: #fff; }
+
+  // &.triangle-up:before { content: "\e000"; }
+  // &.triangle-up-small:before { content: "\e001"; }
+  // &.triangle-right-large:before { content: "\e002"; }
+  // &.triangle-left-large:before { content: "\e003"; }
+  // &.triangle-down:before { content: "\e004"; }
+  // &.info:before { content: "\e016"; }
+  // &.alert:before { content: "\e017"; }
+  // &.question:before { content: "\e018"; }
+  // &.window:before { content: "\e019"; }
+  // &.windows:before { content: "\e01a"; }
+  // &.arrow-right:before { content: "\e02c"; }
+  // &.arrow-left:before { content: "\e02d"; }
+  // &.loop:before { content: "\e02e"; }
+  // &.cmd:before { content: "\e02f"; }
+  // &.mic:before { content: "\e030"; }
+  // &.triangle-down-small:before { content: "\e005"; }
+  // &.check-inverted:before { content: "\e006"; }
+  // &.heart:before { content: "\e007"; }
+  // &.location:before { content: "\e008"; }
+  // &.plus:before { content: "\e009"; }
+  &.check:before { content: "\e00a"; }
+  // &.cross:before { content: "\e00b"; }
+  &.list:before { content: "\e00c"; }
+  // &.new:before { content: "\e00d"; }
+  // &.video:before { content: "\e00e"; }
+  // &.photo:before { content: "\e00f"; }
+  &.volume:before { content: "\e010"; }
+  // &.time:before { content: "\e011"; }
+  // &.eye:before { content: "\e012"; }
+  // &.chat:before { content: "\e013"; }
+  // &.home:before { content: "\e015"; }
+  // &.upload:before { content: "\e01b"; }
+  // &.search:before { content: "\e01c"; }
+  &.user:before { content: "\e01d"; }
+  // &.mail:before { content: "\e01e"; }
+  // &.lock:before { content: "\e01f"; }
+  // &.power:before { content: "\e020"; }
+  // &.star:before { content: "\e021"; }
+  // &.calendar:before { content: "\e023"; }
+  // &.gear:before { content: "\e024"; }
+  // &.book:before { content: "\e025"; }
+  // &.exit:before { content: "\e026"; }
+  // &.trash:before { content: "\e027"; }
+  // &.folder:before { content: "\e028"; }
+  // &.bubble:before { content: "\e029"; }
+  // &.cross-inverted:before { content: "\e02a"; }
+  // &.plus-inverted:before { content: "\e031"; }
+  // &.export:before { content: "\e014"; }
+  // &.radio-unchecked:before { content: "\e02b"; }
+  // &.radio-checked:before { content: "\e032"; }
+  // &.checkbox-unchecked:before { content: "\e033"; }
+  // &.checkbox-checked:before { content: "\e034"; }
+  // &.flat:before { content: "\e035"; }
+  // &.calendar-solid:before { content: "\e022"; }
+  // &.star-2:before { content: "\e036"; }
+  // &.credit-card:before { content: "\e037"; }
+  // &.clip:before { content: "\e038"; }
+  // &.link:before { content: "\e039"; }
+  // &.pause:before { content: "\e03b"; }
+  // &.play:before { content: "\e03c"; }
+  // &.tag:before { content: "\e03d"; }
+  // &.document:before { content: "\e03e"; }
+  // &.image:before { content: "\e03a"; }
+  &.facebook:before { content: "\e03f"; }
+  // &.youtube:before { content: "\e040"; }
+  // &.vimeo:before { content: "\e041"; }
+  &.twitter:before { content: "\e042"; }
+  // &.stumbleupon:before { content: "\e043"; }
+  // &.spotify:before { content: "\e044"; }
+  // &.skype:before { content: "\e045"; }
+  // &.pinterest:before { content: "\e046"; }
+  // &.path:before { content: "\e047"; }
+  // &.myspace:before { content: "\e048"; }
+  // &.linkedin:before { content: "\e049"; }
+  // &.googleplus:before { content: "\e04a"; }
+  // &.dribbble:before { content: "\e04c"; }
+  // &.blogger:before { content: "\e04d"; }
+  // &.behance:before { content: "\e04e"; }
+  // &.list-thumbnailed:before { content: "\e04b"; }
+  // &.list-small-thumbnails:before { content: "\e04f"; }
+  // &.list-numbered:before { content: "\e050"; }
+  // &.list-large-thumbnails:before { content: "\e051"; }
+  // &.list-columned:before { content: "\e052"; }
+  // &.list-bulleted:before { content: "\e053"; }
+} // .icon
+
+i.flag-icon {
+  display: inline-block;
+  width: 16px;
+  height: 11px;
+  background:url('/images/flags.png') no-repeat;
+
+  &.ko {background-position: -16px 0}
+  &.en {background-position: 0 -11px}
+}
+

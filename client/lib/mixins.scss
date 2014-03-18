@@ -1,0 +1,140 @@
+$dark-color: #3498db;
+
+@mixin fullTransition($timer) {
+  -webkit-transition: all $timer ease;
+    -moz-transition: all $timer ease;
+      -ms-transition: all $timer ease;
+        -o-transition: all $timer ease;
+          transition: all $timer ease;
+}
+
+@mixin noTransition() {
+  -webkit-transition: none;
+    -moz-transition: none;
+      -ms-transition: none;
+        -o-transition: none;
+          transition: none;
+}
+
+@mixin buttonTransition($timer) {
+  @include fullTransition($timer);
+
+  &:active {
+    @include noTransition();
+  }
+}
+
+@mixin corner($topLeft, $topRight, $bottomRight, $bottomLeft) {
+  -moz-border-radius-topleft: $topLeft;
+  -webkit-border-top-left-radius: $topLeft;
+  -khtml-border-radius-topleft: $topLeft;
+  border-top-left-radius: $topLeft;
+  -moz-border-radius-topright: $topRight;
+  -webkit-border-top-right-radius: $topRight;
+  -khtml-border-radius-topright: $topRight;
+  border-top-right-radius: $topRight;
+  -moz-border-radius-bottomright: $bottomRight;
+  -webkit-border-bottom-right-radius: $bottomRight;
+  -khtml-border-radius-bottomright: $bottomRight;
+  border-bottom-right-radius: $bottomRight;
+  -moz-border-radius-bottomleft: $bottomLeft;
+  -webkit-border-bottom-left-radius: $bottomLeft;
+  -khtml-border-radius-bottomleft: $bottomLeft;
+  border-bottom-left-radius: $bottomLeft;
+}
+
+@mixin backgroundHover($backgroundColor, $percentage:6%) {
+  background-color: $backgroundColor;
+
+  &:hover {
+    background-color: darken($backgroundColor, $percentage);
+  }
+}
+
+@mixin backgroundClick($backgroundColor, $percentage:10%) {
+  background-color: $backgroundColor;
+
+  &:active {
+    background-color: darken($backgroundColor, $percentage);
+  }
+}
+
+@mixin borderHover($borderColor, $percentage:6%) {
+  border-color: $borderColor;
+
+  &:hover {
+    border-color: darken($borderColor, $percentage);
+  }
+}
+
+
+@mixin borderClick($borderColor, $percentage:10%) {
+  border-color: $borderColor;
+
+  &:active {
+    border-color: darken($borderColor, $percentage);
+  }
+}
+
+@mixin verticalAlign($where: middle) {
+  vertical-align: $where;
+  display:inline-block;
+}
+
+@mixin unselectable() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+@mixin opacity($opacity) {
+  /* Theoretically for IE 8 & 9 (more valid) */
+  /* ...but not required as filter works too */
+  /* should come BEFORE filter */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=" + ($opacity * 10) + ")";
+  /* This works in IE 8 & 9 too */
+  /* ... but also 5, 6, 7 */
+  -moz-opacity:$opacity;
+  /* Safari 1.x (pre WebKit!) */
+  -khtml-opacity:$opacity;
+  /* Modern!
+  /* Firefox 0.9+, Safari 2?, Chrome any?
+  /* Opera 9+, IE 9+ */
+  opacity:$opacity;
+}
+
+@mixin animation($params) {
+  -webkit-animation: $params;
+     -moz-animation: $params;
+      -ms-animation: $params;
+       -o-animation: $params;
+          animation: $params;
+}
+
+@mixin blink() {
+  @include animation(blink .7s ease-in infinite alternate);
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@include keyframes(blink) {
+  0% {color: #eee}
+  100% {color: #000}
+}

@@ -1,0 +1,21 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "scss": {},
+      "i18n": {}
+    },
+    "packages": {
+      "scss": {
+        "git": "https://github.com/fourseven/meteor-scss.git",
+        "tag": "v0.7.0",
+        "commit": "39f60d58c2b890bdd897ef52188644f3093fc2ac"
+      },
+      "i18n": {
+        "git": "https://github.com/jerico-dev/meteor-i18n.git",
+        "tag": "v0.1.1",
+        "commit": "f0fefadc5cc426cf342f0cf1bff3f04390beaa7c"
+      }
+    }
+  }
+}

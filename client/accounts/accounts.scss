@@ -1,0 +1,162 @@
+@import '../lib/mixins';
+
+.user-loggedout {
+  padding:15px 0px;
+
+  .centered {
+    font-size:26px;
+    padding:15px;
+  } // .centered
+
+  .input-nickname {
+    font-size: 20px;
+    padding: 11px 12px;
+    width: 200px;
+    border: 2px solid #cacaca;
+    margin-right:15px;
+    outline:none;
+    @include corner(5px, 5px, 5px, 5px);
+    @include verticalAlign();
+    @include fullTransition(0.3s);
+
+    &:focus {
+      border-color:#3498DB;
+    }
+  } // .input-nickname
+
+  .login-button {
+    width:180px;
+    display:inline-block;
+    padding: 10px 10px 10px 15px;
+    color:#eee;
+    cursor:pointer;
+    border:none;
+    font-size:0;
+    @include corner(5px, 5px, 5px, 5px);
+    @include verticalAlign();
+    @include fullTransition(0.4s);
+    @include unselectable();
+
+    &:active {
+      @include noTransition();
+    }
+
+    i {
+      padding-right:15px;
+      font-size:22px;
+      @include verticalAlign();
+    }
+
+    .seperator {
+      width:0;
+      height:30px;
+      border-right:1px solid #aaa;
+      @include verticalAlign();
+      @include fullTransition(0.4s);
+    }
+
+    .right {
+      font-size:20px;
+      @include verticalAlign();
+    }
+
+    &.guest {
+      width:150px;
+      color:#fff;
+      @include backgroundHover(#c0c0c0);
+      @include backgroundClick(#c0c0c0);
+
+      .right {
+        padding:0 5px 0 15px;
+      }
+    }
+
+    &.facebook {
+      margin-right:15px;
+      @include backgroundHover(#3B5998, 9%);
+      @include backgroundClick(#3B5998, 13%);
+
+      .right {
+        padding:0 15px 0 15px;
+      }
+
+      .seperator {
+        border-color:#2B406E;
+      }
+
+      &:hover {
+        .seperator {
+          border-color: darken(#2B406E, 9%);
+        }
+      }
+
+      &:active {
+        .seperator {
+          border-color: darken(#2B406E, 13%);
+        }
+      }
+    } // .facebook
+
+    &.twitter {
+      @include backgroundHover(#4CBEE0, 10%);
+      @include backgroundClick(#4CBEE0, 15%);
+
+      .right {
+        padding:0 25px 0 15px;
+      }
+
+      .seperator {
+        border-color:#43A3BF;
+      }
+
+      &:hover {
+        .seperator {
+          border-color: darken(#43A3BF, 9%);
+        }
+      }
+
+      &:active {
+        .seperator {
+          border-color: darken(#43A3BF, 13%);
+        }
+      }
+
+      i {
+        height:21px; // Hack cause of bad twitter icon
+      }
+    } // .twitter
+  } // .login-button
+} // .user-loggedout
+
+.user-loggedin {
+  .account-info {
+    display: inline-block;
+
+    i.icon {
+      font-size: 28px;
+      vertical-align: middle;
+      margin-bottom: -4px;
+      border:1px solid #ccc;
+      padding:3px 5px;
+      margin-bottom:2px;
+      @include corner(4px, 4px, 4px, 4px);
+    }
+
+    img {
+      width: 35px;
+      height: 35px;
+      vertical-align: middle;
+    }
+
+    .account-info-text {
+      display: inline-block;
+      max-width:100px;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      overflow:hidden;
+      margin-left: 5px;
+      text-align: left;
+      vertical-align: middle;
+    }
+  } // .account-info
+} // .user-loggedin

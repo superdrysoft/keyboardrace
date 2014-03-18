@@ -1,0 +1,4 @@
+.DS_Store
+.meteor/local
+.demeteorized/programs
+server/config.js

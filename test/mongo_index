@@ -1,0 +1,20 @@
+use keyboardrace
+
+db.paragraphs.ensureIndex( { "language" : 1, "type" : 1 } );
+
+db.races.ensureIndex( { "status" : 1, "language" : 1 } );
+
+db.raceData.ensureIndex( { "race_id" : 1, "finished" : 1 } );
+db.raceData.ensureIndex( { "user_id" : 1, "finished" : 1 } );
+db.raceData.ensureIndex( { "finished" : 1 } );
+
+db.raceChat.ensureIndex( { "race_id" : 1 } );
+
+db.raceTimers.ensureIndex( { "race_id" : 1 } );
+
+db.ranking.ensureIndex( { "language" : 1, "created_at" : 1, "cpm" : 1 } );
+db.ranking.ensureIndex( { "user_id" : 1, "created_at" : 1, "language" : 1 } );
+
+DBQuery.shellBatchSize = 300
+
+db.system.indexes.find();

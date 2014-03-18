@@ -1,0 +1,287 @@
+<head>
+  <title>Keyboard Race - Multiplayer Browser Typing Game</title>
+
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed.png"/>
+
+  <meta name="description" content="Test your typing speed and accuracy in this multiplayer browser typing game. No download or registration required!"/>
+  <meta name="keywords" content="typing game, typing test, keyboard practice, multiplayer typing, type Race, keyboard race, typing practice, typing competition">
+
+  <meta property="fb:app_id" content="556639047754442" />
+  <meta property="og:type" content="keyboardrace:game" />
+  <meta property="og:url" content="http://keyboardrace.com"/>
+  <meta property="og:title" content="Keyboard Race"/>
+  <meta property="og:image" content="http://keyboardrace.com/logo-256.png"/>
+  <meta property="og:site_name" content="KeyboardRace.com"/>
+  <meta property="og:description" content="Test your typing speed and accuracy in this multiplayer browser typing game."/>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+
+  <div class="body-inner">
+    <div class="column-left">
+      <div class="logo column-header">
+        <div id="logo" class="header-text">&nbsp;</div>
+        <div class="sns-buttons">
+          <div class="height-fix"></div>
+          <div class="fb-like" data-href="http://keyboardrace.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://keyboardrace.com" data-text="Keyboard Race - Test your typing speed and accuracy in this multiplayer browser typing game." data-via="Superdrysoft">Tweet</a>
+        </div>
+      </div>
+      <div class="column-body">
+        {{> join }}
+
+        {{> main }}
+      </div> <!-- .column-body -->
+
+      {{> ranking }}
+
+    </div> <!-- .column-left -->
+
+    <div class="column-right">
+      {{> language_widget }}
+
+      {{> user_widget }}
+
+      {{> chat_widget}}
+
+      {{> stats_widget }}
+    </div>
+    <!-- //.container-right -->
+  </div>
+  <!-- // .body-inner -->
+</body>
+
+<!-- ************************* COLUMN LEFT TEMPLATES ***************************** -->
+
+<template name="main">
+  {{#if raceVisible }}
+    {{> race_header }}
+
+    {{> users }}
+
+    {{> paragraph }}
+
+    {{> restart }}
+  {{/if}}
+</template>
+
+<template name="race_header">
+  <div class="race-header">
+    {{#if loadingVisible}}
+      {{> loading}}
+    {{else}}
+      {{#if raceStarted}}
+        {{{t 'ui.main.race_started'}}}
+      {{/if}}
+    {{/if}}
+    <i id="volume-control" class="icon volume{{#if volumeOff}} off{{/if}}"></i>
+  </div>
+</template>
+
+<template name="loading">
+  <span class="loading">{{{t 'ui.main.waiting'}}}</span>
+
+  {{#if raceCounting}}
+    - Will start in {{race.timer}} seconds
+  {{else}}
+    <div id="play-solo" class="btn">{{{t 'ui.main.play_solo'}}}</div>
+  {{/if}}
+</template>
+
+<template name="users">
+  <div class="track-container">
+    {{#each users}}
+      {{> user}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="user">
+  <div class="track-outer">
+    <div class="user-name">
+      {{#constant}}
+        <div class="user-name-inner">{{name}}</div>
+      {{/constant}}
+    </div>
+    <div class="track {{#if finished}}finished{{/if}}" id="user-{{order}}">
+      {{#constant}}
+        <div class="avatar-cpm">0</div>
+        <span class="avatar car-icons icon-{{order}}"></span>
+        <div class="goal-left"></div>
+        <div class="goal-right"></div>
+      {{/constant}}
+    </div>
+  </div>
+</template>
+
+<template name="restart">
+  {{#if raceStarted}}
+    <div class="play-again">
+      {{#if raceData.finished}}
+        {{{t 'ui.main.result' raceData}}}
+
+        {{> reference}}
+
+        <div id="share-on-facebook" class="btn primary">Share on Facebook!</div>
+      {{/if}}
+
+      <div id="play-again-btn" class="btn">New Game</div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="reference">
+  <p>
+    {{{t 'ui.main.reference'}}}
+    {{#if paragraph.reference}}
+      <a href="{{paragraph.reference}}" target="_blank">
+    {{/if}}
+
+      {{#with paragraph}}
+        {{type}} -
+        {{#if title}} &quot;{{ title }}&quot; {{/if}}
+        {{#if author}} by <i>{{author}}</i> {{/if}}
+      {{/with}}
+
+    {{#if paragraph.reference}}
+      </a>
+    {{/if}}
+  </p>
+</template>
+
+<template name="paragraph">
+  <div class="paragraph-container">
+    <div id="paragraph" class="paragraph">
+      {{#if showParagraph}}
+        {{#if paragraph}}
+          {{#constant}}
+          {{#each paragraph}}
+            <span class="word">{{this}}</span>
+          {{/each}}
+          {{/constant}}
+        {{/if}}
+      {{else}}
+        {{{t 'ui.main.paragraph_placeholder'}}}
+      {{/if}}
+    </div>
+
+    {{#if showInput}}
+      {{> typer_input}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="typer_input">
+  <input type="text" class="typer-input" id="typer-input" placeholder="Type the world highlighted" />
+</template>
+
+<template name="ranking">
+  <div class="column-header rank">
+    <span class="header-block{{#unless globalRank}} active{{else}} inactive{{/unless}}" data-globalrank="false">
+      {{{t 'ui.widget.header_ranking'}}}
+    </span>
+    <span class="header-block{{#if globalRank}} active{{else}} inactive{{/if}}" data-globalrank="true">
+      {{{t 'ui.widget.header_ranking_global'}}}
+    </span>
+
+    <i class="flag-icon {{flag}}"></i>
+  </div>
+  <div class="column-body ranking">
+    <div class="ranking-row title">
+      <div class="ranking-column position">#</div>
+      <div class="ranking-column name">{{{t 'ui.widget.ranking_name'}}}</div>
+      <div class="ranking-column wpm">{{{t 'ui.widget.ranking_wpm'}}}</div>
+      <div class="ranking-column date">{{{t 'ui.widget.ranking_date'}}}</div>
+    </div>
+    {{#each ranks}}
+    <div class="ranking-row data">
+      <div class="ranking-column position">{{position}}</div>
+      <div class="ranking-column name">{{name}}</div>
+      <div class="ranking-column wpm">{{cpm}} ({{wpm}})</div>
+      <div class="ranking-column date">{{{formattedDate created_at}}}</div>
+    </div>
+    {{/each}}
+  </div> <!-- .column-body -->
+</template>
+
+<!-- ************************* COLUMN RIGHT TEMPLATES ***************************** -->
+
+<template name="language_widget">
+  <div id="widget-language" class="widget language">
+    <div class="widget-header">
+      <div>{{{t 'ui.language.' currentLanguage}}}<i class="flag-icon {{currentLanguage}}"></i><div class="caret"></div></div>
+      {{#constant}}<div class="language-open openable">Language<div class="caret"></div></div>{{/constant}}
+    </div>
+    {{#constant}}
+      <div class="widget-body openable">
+        <div title="en"><i class="flag-icon en"></i>English<i class="icon check{{#if locale language="en"}} active{{/if}}"></i></div>
+        <div title="ko"><i class="flag-icon ko"></i>한국어<i class="icon check{{#if locale language="ko"}} active{{/if}}"></i></div>
+      </div>
+    {{/constant}}
+  </div>
+</template>
+
+<template name="stats_widget">
+  <div class="widget stats">
+    <div class="widget-header">{{{t 'ui.widget.header_statistics'}}}</div>
+    <div class="widget-body">
+      <div class="widget-body-row">
+        <div class="widget-body-column">{{{t 'ui.widget.stats_users'}}}</div>
+        <div class="widget-body-column">{{totalUsers.count}}</div>
+      </div>
+      <div class="widget-body-row">
+        <div class="widget-body-column">{{{t 'ui.widget.stats_games'}}}</div>
+        <div class="widget-body-column">{{totalGames.count}}</div>
+      </div>
+      <div class="widget-body-row">
+        <div class="widget-body-column">{{{t 'ui.widget.stats_cpm'}}}</div>
+        <div class="widget-body-column">{{aggregates.cpm}}</div>
+      </div>
+      <div class="widget-body-row">
+        <div class="widget-body-column">{{{t 'ui.widget.stats_wpm'}}}</div>
+        <div class="widget-body-column">{{aggregates.wpm}}</div>
+      </div>
+      <div class="widget-body-row">
+        <div class="widget-body-column">{{{t 'ui.widget.stats_accuracy'}}}</div>
+        <div class="widget-body-column">{{aggregates.accuracy}}%</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="chat_widget">
+  {{#if currentUser}}
+    <div class="widget chat">
+      <div class="widget-header">
+        <div class="widget-header-left{{#unless globalChat}} active{{else}} inactive{{/unless}}" data-globalchat="false">{{{t 'ui.widget.header_chat'}}}</div>
+        <div class="widget-header-right{{#if globalChat}} active{{else}} inactive{{/if}}" data-globalchat="true">
+          {{{t 'ui.widget.header_chat_global'}}}
+        </div>
+      </div>
+      <div class="widget-body">{{> chat}}</div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="chat">
+  <div class="height-fix"></div>
+  <div class="align-container">
+    <div id="chat-message-container" class="chat-message-container">
+    {{#if hasMessages}}
+      {{#each messages}}
+        <div class="chat-message-outer">
+          <abbr class="inner-name">{{name}}</abbr>
+          {{message}}
+        </div>
+      {{/each}}
+    {{else}}
+    <div class="no-message">{{{t 'ui.widget.no_message'}}}</div>
+    {{/if}}
+    </div>
+    {{#constant}}
+      <div id="send-message" class="send-message"><input type="text" placeholder="{{{t 'ui.widget.type_message'}}}" maxlength="255"></input></div>
+    {{/constant}}
+  </div>
+</template>

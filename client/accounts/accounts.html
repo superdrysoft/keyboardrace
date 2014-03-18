@@ -1,0 +1,61 @@
+<template name="join">
+  {{#unless currentUser}}
+    {{> user_loggedout}}
+  {{/unless}}
+</template>
+
+<template name="user_widget">
+  {{#if currentUser}}
+    <div class="widget user-info">
+      <div class="widget-header">{{{t 'ui.widget.header_user'}}}</div>
+      <div class="widget-body">{{> user_loggedin }}</div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="user_loggedin">
+  <div class="user-loggedin">
+    {{#if loggingIn}}
+      <div>Signing in...</div>
+    {{else}}
+      <div class="account-info">
+        {{#if currentUser.profile.avatar_url}}
+          <img src="{{currentUser.profile.avatar_url}}"/>
+        {{else}}
+          <i class="icon user"></i>
+        {{/if}}
+        <div class="account-info-text">
+          {{currentUser.profile.name}}<br/>
+          <a href="javascript:void(0);" id="logout">{{{t 'ui.widget.signout'}}}</a>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="user_loggedout">
+  <div class="user-loggedout">
+    <div class="centered">{{{t 'ui.main.social_login'}}}</div>
+    <div class="centered">
+      <button class="login-button facebook" id="facebook-login">
+        <i class="icon facebook"></i>
+        <div class="seperator"></div>
+        <div class="right">Facebook</div>
+      </button>
+      <button class="login-button twitter"id="twitter-login">
+        <i class="icon twitter"></i>
+        <div class="seperator"></div>
+        <div class="right">Twitter</div>
+      </button>
+    </div>
+    <div class="centered">{{{t 'ui.main.guest_login'}}}</div>
+    <div class="centered">
+      <input type="text" id="username" class="input-nickname" placeholder="Your nickname" maxlength="30"></input>
+      <button class="login-button guest" id="guest-login">
+        <i class="icon user"></i>
+        <div class="seperator"></div>
+        <div class="right">Guest</div>
+      </button>
+    </div>
+  </div>
+</template>

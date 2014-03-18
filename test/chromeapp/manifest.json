@@ -1,0 +1,17 @@
+{
+  "name": "Keyboard Race",
+  "description": "Test your typing speed and accuracy in this multiplayer browser typing game.",
+  "version": "0.2",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "app": {
+    "urls": [
+      "http://keyboardrace.com/"
+    ],
+    "launch": {
+      "web_url": "http://keyboardrace.com/"
+    }
+  }
+}
