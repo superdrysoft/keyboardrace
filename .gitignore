@@ -2,3 +2,5 @@
 .meteor/local
 .demeteorized/programs
 server/config_real.js
+meteoric.config.sh
+meteoric.sh

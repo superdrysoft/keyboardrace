@@ -49,7 +49,7 @@ body {
             @include verticalAlign();
           }
           .twitter-share-button {
-            width:80px !important;
+            width:83px !important;
             @include verticalAlign();
           }
         } // .sns-buttons
@@ -615,6 +615,34 @@ body {
             } // .widget-body-row
           } // .widget-body
         } // .stats
+
+        &.banners {
+          a {
+            text-decoration: none;
+            color: #2c90b6;
+            .widget-body-row {
+              padding: 8px;
+              overflow: hidden;
+
+              img {
+                display: inline-block;
+                vertical-align: top;
+                width: 36px;
+                height: 36px;
+              }
+              .project-detail {
+                display: inline-block;
+                vertical-align: top;
+                margin-left: 8px;
+                font-size: 12px;
+                strong {
+                  font-size: 15px;
+                  display: block;
+                }
+              }
+            } // .widget-body-row
+          } // a
+        } // &.banners
       } // .widget
     } // .container-right
   } // .body-inner
