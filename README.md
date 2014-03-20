@@ -11,3 +11,7 @@ Some problems we've identified so far:
    The index file is located at /test/mongo_index
 
 
+## Setup dev environment
+1. Install Meteor: `curl https://install.meteor.com/ | sh`
+2. Install Meteorite package manager: `npm install -g meteorite`
+3. Install packages and start server: `mrt`
