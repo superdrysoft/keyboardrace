@@ -299,6 +299,6 @@ Meteor.startup(function() {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-46011578-1', 'keyboardrace.com');
+ga('create', 'UA-49111835-2', 'keyboardrace.com');
 ga('send', 'pageview');
 
